@@ -1,8 +1,9 @@
+# bot.py
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
+from scheduler import start_scheduler  # Імпортуємо планувальник
 
-# Токен бота (заміни "YOUR_TOKEN_HERE" на свій токен)
-TOKEN ="7541039582:AAEOR0I5_Xu4XfKruKX-Q2oBCBHx7QJi5QM"
+TOKEN = "7541039582:AAEOR0I5_Xu4XfKruKX-Q2oBCBHx7QJi5QM"
 bot = telebot.TeleBot(TOKEN)
 
 # Створюємо клавіатуру з кнопками
@@ -31,6 +32,9 @@ def message_handler(message):
         bot.send_message(message.chat.id, "Ось посилання на навчання: https://learn.ztu.edu.ua/")
     else:
         bot.send_message(message.chat.id, "Виберіть один із варіантів на клавіатурі!")
+
+# Запуск планувальника
+start_scheduler()
 
 # Запуск бота
 bot.polling(none_stop=True)
