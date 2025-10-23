@@ -1,16 +1,15 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
-TOKEN = "7541039582:AAEOR0I5_Xu4XfKruKX-Q2oBCBHx7QJi5QM"
+
 bot = telebot.TeleBot(TOKEN)
 
-# Створюємо клавіатуру з кнопками
 def create_keyboard():
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(KeyboardButton("Розклад"), KeyboardButton("Кабінет"), KeyboardButton("Learn"))
     return keyboard
 
-# Обробник команди /start
+
 @bot.message_handler(commands=["start"])
 def start_handler(message):
     bot.send_message(
@@ -19,7 +18,7 @@ def start_handler(message):
         reply_markup=create_keyboard()
     )
 
-# Обробник текстових повідомлень
+
 @bot.message_handler(func=lambda message: True)
 def message_handler(message):
     if message.text == "Розклад":
@@ -32,5 +31,5 @@ def message_handler(message):
         bot.send_message(message.chat.id, "Виберіть один із варіантів на клавіатурі!")
 
 
-# Запуск бота
+
 bot.polling(none_stop=True)
